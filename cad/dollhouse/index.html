@@ -76,11 +76,11 @@
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 2000);
-    camera.position.set(155, -170, 125);
+    camera.position.set(155, 125, 170);
 
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
-    controls.target.set(0, 0, 55);
+    controls.target.set(0, 55, 0);
 
     scene.add(new THREE.HemisphereLight(0xffffff, 0x70685f, 2.1));
     const key = new THREE.DirectionalLight(0xffffff, 2.3);
@@ -88,16 +88,14 @@
     scene.add(key);
 
     const floor = new THREE.GridHelper(180, 18, 0x777777, 0xb8b1a5);
-    floor.position.z = -0.5;
-    floor.rotation.x = Math.PI / 2;
+    floor.position.y = -0.5;
     scene.add(floor);
 
     new GLTFLoader().load(
       './simple_dollhouse.glb',
       (gltf) => {
         const model = gltf.scene;
-        model.rotation.x = -Math.PI / 2;
-        model.rotation.z = Math.PI;
+        model.scale.setScalar(1000);
         model.traverse((obj) => {
           if (obj.isMesh) {
             obj.castShadow = false;
