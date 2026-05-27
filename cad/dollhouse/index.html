@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dollhouse CAD Preview</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #ece7dd;
+      color: #242424;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    #viewer {
+      width: 100vw;
+      height: 100vh;
+      display: block;
+    }
+
+    .hud {
+      position: fixed;
+      left: 16px;
+      top: 16px;
+      max-width: min(360px, calc(100vw - 32px));
+      padding: 12px 14px;
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(40, 40, 40, 0.14);
+      border-radius: 8px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+    }
+
+    h1 {
+      margin: 0 0 4px;
+      font-size: 18px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    p {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.35;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="viewer"></canvas>
+  <div class="hud">
+    <h1>Simple Dollhouse CAD Test</h1>
+    <p>STEP-derived GLB preview. Drag to orbit, scroll to zoom.</p>
+  </div>
+
+  <script type="module">
+    import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js';
+    import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/controls/OrbitControls.js';
+    import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/loaders/GLTFLoader.js';
+
+    const canvas = document.querySelector('#viewer');
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setClearColor(0xece7dd, 1);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 2000);
+    camera.position.set(155, -170, 125);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.target.set(0, 0, 55);
+
+    scene.add(new THREE.HemisphereLight(0xffffff, 0x70685f, 2.1));
+    const key = new THREE.DirectionalLight(0xffffff, 2.3);
+    key.position.set(90, -120, 180);
+    scene.add(key);
+
+    const floor = new THREE.GridHelper(180, 18, 0x777777, 0xb8b1a5);
+    floor.position.z = -0.5;
+    floor.rotation.x = Math.PI / 2;
+    scene.add(floor);
+
+    new GLTFLoader().load(
+      './simple_dollhouse.glb',
+      (gltf) => {
+        const model = gltf.scene;
+        model.traverse((obj) => {
+          if (obj.isMesh) {
+            obj.castShadow = false;
+            obj.receiveShadow = true;
+            if (obj.material) {
+              obj.material.roughness = 0.78;
+              obj.material.metalness = 0.02;
+            }
+          }
+        });
+        scene.add(model);
+      },
+      undefined,
+      (error) => {
+        document.querySelector('.hud p').textContent = `Model failed to load: ${error.message}`;
+      }
+    );
+
+    function resize() {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      renderer.setSize(width, height, false);
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+
+    function animate() {
+      controls.update();
+      renderer.render(scene, camera);
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+</body>
+</html>
