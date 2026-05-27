@@ -57,8 +57,15 @@
     <p>STEP-derived GLB preview. Drag to orbit, scroll to zoom.</p>
   </div>
 
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js"
+      }
+    }
+  </script>
   <script type="module">
-    import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js';
+    import * as THREE from 'three';
     import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/controls/OrbitControls.js';
     import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/loaders/GLTFLoader.js';
 
@@ -89,6 +96,8 @@
       './simple_dollhouse.glb',
       (gltf) => {
         const model = gltf.scene;
+        model.rotation.x = -Math.PI / 2;
+        model.rotation.z = Math.PI;
         model.traverse((obj) => {
           if (obj.isMesh) {
             obj.castShadow = false;
