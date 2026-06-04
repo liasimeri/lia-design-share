@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Concertina Cooler Manufacturing Brief</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #18212b;
+      --muted: #5e6873;
+      --line: #d8dee5;
+      --paper: #f4f6f7;
+      --panel: #ffffff;
+      --blue: #1f6f8b;
+      --green: #557a46;
+      --amber: #a56a24;
+      --red: #a64d3f;
+      --charcoal: #27313a;
+    }
+    * { box-sizing: border-box; }
+    html { background: var(--paper); }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.42;
+    }
+    a { color: var(--blue); text-underline-offset: 3px; }
+    header {
+      min-height: 72vh;
+      display: grid;
+      align-items: end;
+      padding: 56px clamp(20px, 5vw, 76px);
+      color: white;
+      background:
+        linear-gradient(115deg, rgba(24,33,43,.92), rgba(24,33,43,.56)),
+        linear-gradient(135deg, #203d49, #687d63 56%, #c1843f);
+    }
+    .hero-inner { max-width: 1140px; }
+    .eyebrow {
+      margin-bottom: 14px;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-size: 12px;
+      font-weight: 800;
+      opacity: .84;
+    }
+    h1 {
+      margin: 0 0 18px;
+      max-width: 940px;
+      font-size: clamp(42px, 7.4vw, 82px);
+      line-height: .98;
+      letter-spacing: 0;
+    }
+    .hero-copy {
+      max-width: 780px;
+      margin: 0;
+      color: rgba(255,255,255,.88);
+      font-size: clamp(17px, 2.1vw, 23px);
+    }
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 10px clamp(14px, 4vw, 56px);
+      border-bottom: 1px solid var(--line);
+      background: rgba(244,246,247,.92);
+      backdrop-filter: blur(12px);
+    }
+    nav a {
+      flex: 0 0 auto;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: white;
+      color: var(--ink);
+      font-size: 14px;
+      text-decoration: none;
+    }
+    section {
+      padding: 46px clamp(20px, 5vw, 76px);
+      border-bottom: 1px solid var(--line);
+    }
+    .section-inner { max-width: 1180px; margin: 0 auto; }
+    h2 {
+      margin: 0 0 12px;
+      font-size: clamp(29px, 4vw, 46px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+    h3 { margin: 0 0 8px; font-size: 20px; line-height: 1.18; letter-spacing: 0; }
+    p { margin: 0 0 12px; }
+    .lead {
+      max-width: 880px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+      margin-top: 22px;
+    }
+    .card {
+      min-height: 190px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: 0 1px 0 rgba(24,33,43,.04);
+    }
+    .callout {
+      padding: 22px;
+      border-left: 6px solid var(--blue);
+      border-radius: 0 8px 8px 0;
+      background: white;
+    }
+    .tag {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: #e8eef2;
+      color: #30404f;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+    .tag.green { background: #e8f0e3; color: var(--green); }
+    .tag.amber { background: #f3eadf; color: var(--amber); }
+    .tag.red { background: #f3e5e1; color: var(--red); }
+    ul { margin: 10px 0 0; padding-left: 18px; color: var(--muted); }
+    li { margin: 6px 0; }
+    .split {
+      display: grid;
+      grid-template-columns: .92fr 1.08fr;
+      gap: 18px;
+      margin-top: 22px;
+      align-items: stretch;
+    }
+    .diagram {
+      min-height: 430px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+    }
+    .bag {
+      position: relative;
+      width: min(100%, 520px);
+      height: 250px;
+      margin: 22px auto 20px;
+      border-bottom: 22px solid #2b333b;
+    }
+    .face {
+      position: absolute;
+      bottom: 22px;
+      width: 64px;
+      height: 190px;
+      clip-path: polygon(18% 0, 100% 11%, 82% 100%, 0 90%);
+      background: linear-gradient(155deg, #f0a035, #cf642b);
+      border: 2px solid rgba(89,55,29,.25);
+    }
+    .face:nth-child(1) { left: 4%; transform: skewY(-5deg); }
+    .face:nth-child(2) { left: 18%; transform: skewY(6deg); }
+    .face:nth-child(3) { left: 32%; transform: skewY(-5deg); }
+    .face:nth-child(4) { left: 46%; transform: skewY(6deg); }
+    .face:nth-child(5) { left: 60%; transform: skewY(-5deg); }
+    .face:nth-child(6) { left: 74%; transform: skewY(6deg); }
+    .rim {
+      position: absolute;
+      left: 4%;
+      right: 5%;
+      top: 16px;
+      height: 34px;
+      border: 8px solid rgba(220,232,236,.75);
+      border-radius: 24px 24px 8px 8px;
+      background: rgba(255,255,255,.45);
+    }
+    .strap {
+      position: absolute;
+      top: 40px;
+      bottom: 0;
+      width: 18px;
+      border-radius: 999px;
+      background: #1f252b;
+    }
+    .strap.left { left: 18%; }
+    .strap.right { right: 18%; }
+    .label-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+    .label {
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--muted);
+      background: #f7f9fa;
+      font-size: 13px;
+    }
+    .stack {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .layer {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 12px;
+      align-items: center;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+    }
+    .swatch {
+      min-height: 48px;
+      border-radius: 6px;
+      border: 1px solid rgba(0,0,0,.08);
+    }
+    .shell { background: repeating-linear-gradient(135deg, #f0a035 0 18px, #d9692d 18px 36px); }
+    .foam { background: #dfe9c8; }
+    .liner { background: #cfe8ef; }
+    .load { background: #27313a; }
+    .matrix {
+      display: grid;
+      grid-template-columns: minmax(160px, .8fr) minmax(220px, 1fr) minmax(250px, 1.2fr);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: white;
+      margin-top: 22px;
+    }
+    .matrix div { padding: 14px 16px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .matrix div:nth-child(3n) { border-right: 0; }
+    .matrix div:nth-last-child(-n+3) { border-bottom: 0; }
+    .head { font-weight: 800; background: #e9eef2; color: #26323d; }
+    .source-list {
+      columns: 2;
+      column-gap: 32px;
+      margin-top: 16px;
+    }
+    .source-list li { break-inside: avoid; margin: 0 0 12px; }
+    footer { padding: 28px clamp(20px, 5vw, 76px); color: var(--muted); font-size: 14px; }
+    @media (max-width: 800px) {
+      .split { grid-template-columns: 1fr; }
+      .matrix { grid-template-columns: 1fr; }
+      .matrix div { border-right: 0; }
+      .matrix .head:nth-child(2), .matrix .head:nth-child(3) { display: none; }
+      .label-row { grid-template-columns: 1fr 1fr; }
+      .source-list { columns: 1; }
+    }
+    @media print {
+      @page { size: letter landscape; margin: .34in; }
+      html, body {
+        width: 11in;
+        background: white;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      body { font-size: 10.5px; line-height: 1.24; }
+      nav { display: none; }
+      header, section, footer {
+        break-after: page;
+        page-break-after: always;
+        border-bottom: 0;
+      }
+      header {
+        min-height: 7.7in;
+        padding: .56in;
+      }
+      h1 { font-size: 55px; max-width: 8.5in; }
+      .hero-copy { max-width: 7.6in; font-size: 17px; }
+      section { padding: 0; }
+      .section-inner { max-width: none; width: 100%; }
+      h2 { font-size: 30px; margin-bottom: 8px; }
+      h3 { font-size: 14px; margin-bottom: 5px; }
+      p { margin-bottom: 6px; }
+      ul { margin-top: 5px; padding-left: 13px; }
+      li { margin: 2px 0; }
+      .lead { max-width: 9in; font-size: 12px; }
+      .grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        margin-top: 10px;
+      }
+      .card {
+        min-height: 0;
+        padding: 10px;
+        box-shadow: none;
+        break-inside: avoid;
+      }
+      .callout { padding: 12px; border-left-width: 4px; }
+      .tag {
+        margin-bottom: 5px;
+        padding: 3px 5px;
+        font-size: 8px;
+      }
+      .split {
+        grid-template-columns: .9fr 1.1fr;
+        gap: 10px;
+        margin-top: 10px;
+      }
+      .diagram {
+        min-height: 0;
+        padding: 10px;
+      }
+      .bag {
+        height: 185px;
+        margin: 10px auto 8px;
+        border-bottom-width: 16px;
+      }
+      .face {
+        bottom: 16px;
+        width: 48px;
+        height: 142px;
+      }
+      .rim { top: 8px; height: 25px; border-width: 6px; }
+      .strap { top: 28px; width: 13px; }
+      .label-row { gap: 5px; }
+      .label { padding: 6px; font-size: 9px; }
+      .stack { gap: 6px; margin-top: 8px; }
+      .layer {
+        grid-template-columns: 92px 1fr;
+        gap: 8px;
+        padding: 7px;
+      }
+      .swatch { min-height: 34px; }
+      .matrix { margin-top: 10px; }
+      .matrix div { padding: 8px 10px; }
+      .source-list { columns: 2; column-gap: 24px; }
+      footer { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="hero-inner">
+      <div class="eyebrow">Westfield concept manufacturing brief · draft</div>
+      <h1>Insulated Concertina Cooler Manufacturing Strategy</h1>
+      <p class="hero-copy">A practical construction path for an expandable cooler with a faceted external structure: make the outside carry the visual fold language, then solve insulation, leak resistance, and load-bearing with independent layers.</p>
+    </div>
+  </header>
+
+  <nav aria-label="Brief sections">
+    <a href="#recommendation">Recommendation</a>
+    <a href="#construction">Construction</a>
+    <a href="#materials">Materials</a>
+    <a href="#risks">Risks</a>
+    <a href="#prototype">Prototype</a>
+    <a href="#sources">Sources</a>
+  </nav>
+
+  <section id="recommendation">
+    <div class="section-inner">
+      <h2>Recommended Direction</h2>
+      <p class="lead">Do not treat the entire wall as one continuous insulated accordion. Thick foam and waterproof liners do not like repeated sharp creasing. The stronger path is a semi-rigid segmented soft cooler: faceted outside shell, separate insulated panels, controlled hinge valleys, welded liner, and a load path that bypasses the folding wall.</p>
+      <div class="grid">
+        <article class="card">
+          <span class="tag green">Best architecture</span>
+          <h3>Segmented insulated wall</h3>
+          <p>Put closed-cell foam panels on the broad faces and leave the valleys as thin flex zones. This keeps insulation where it matters without crushing foam every time the cooler collapses.</p>
+        </article>
+        <article class="card">
+          <span class="tag amber">Visual strategy</span>
+          <h3>Faceted external exoshell</h3>
+          <p>The orange concertina geometry should be the outer shape/form layer. It can be laminated fabric, TPU-coated textile, tarpaulin, or thin thermoformed EVA/TPU panels.</p>
+        </article>
+        <article class="card">
+          <span class="tag">Leak strategy</span>
+          <h3>Welded inner bucket</h3>
+          <p>Use a separate TPU or PEVA liner with slack for expansion and collapse. Heat, RF, or induction welding is preferable to sewn liner seams for a leak-resistant cooler story.</p>
+        </article>
+        <article class="card">
+          <span class="tag red">Critical rule</span>
+          <h3>Carry load outside the folds</h3>
+          <p>Handles and shoulder straps should connect to reinforced rails, side columns, rim, or base. The folded wall should shape volume, not carry the full ice and beverage load.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="construction">
+    <div class="section-inner">
+      <h2>Proposed Construction Stack</h2>
+      <p class="lead">The concept works best as a three-layer bag plus independent carry structure. This separates visual form, insulation, waterproofing, and load-bearing so each material can do the job it is good at.</p>
+      <div class="split">
+        <div class="diagram" aria-label="Faceted cooler construction diagram">
+          <h3>Faceted outside, hidden thermal system</h3>
+          <div class="bag">
+            <div class="rim"></div>
+            <div class="strap left"></div>
+            <div class="strap right"></div>
+            <div class="face"></div>
+            <div class="face"></div>
+            <div class="face"></div>
+            <div class="face"></div>
+            <div class="face"></div>
+            <div class="face"></div>
+          </div>
+          <div class="label-row">
+            <div class="label"><strong>Rigid/semi-rigid rim</strong><br>Stabilizes opening and zipper or roll-top alignment.</div>
+            <div class="label"><strong>Faceted outer shell</strong><br>Creates the concertina look and crush-resistant form.</div>
+            <div class="label"><strong>Load rails</strong><br>Carry straps bypass the folding wall.</div>
+            <div class="label"><strong>Stable base</strong><br>Prevents loaded cooler sag and twist.</div>
+          </div>
+        </div>
+        <div class="stack">
+          <div class="layer">
+            <div class="swatch shell"></div>
+            <div><strong>Outer shell:</strong> TPU-coated polyester/nylon, laminated tarpaulin, heavy 600D-1680D polyester, or thin thermoformed EVA/TPU panels heat-welded or sewn into zig-zag faces.</div>
+          </div>
+          <div class="layer">
+            <div class="swatch foam"></div>
+            <div><strong>Insulation:</strong> EPE/XPE/closed-cell foam panels on broad wall faces. Use thinner flexible hinge strips at valleys. Aerogel fabric is a premium experiment for thin cold-bridge zones.</div>
+          </div>
+          <div class="layer">
+            <div class="swatch liner"></div>
+            <div><strong>Inner liner:</strong> Welded TPU or PEVA bucket liner, slightly oversized so it can expand and collapse without pulling at seams or corners.</div>
+          </div>
+          <div class="layer">
+            <div class="swatch load"></div>
+            <div><strong>Load structure:</strong> Webbing rails, side columns, reinforced base, and rim carry the weight. Folding facets remain a shape/volume system.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="materials">
+    <div class="section-inner">
+      <h2>Manufacturing Options</h2>
+      <p class="lead">The right construction depends on target price and performance. These routes are ordered from most practical near-term path to higher-risk premium exploration.</p>
+      <div class="matrix">
+        <div class="head">Route</div>
+        <div class="head">How it is made</div>
+        <div class="head">Why it matters</div>
+        <div><strong>Soft panel cooler</strong></div>
+        <div>TPU-coated or polyester shell, EPE/XPE foam panels, welded liner, webbing reinforcement, sewn/welded perimeter.</div>
+        <div>Most manufacturable. Fits existing soft cooler suppliers and gives a realistic cost/performance starting point.</div>
+        <div><strong>Faceted shell + foam insert</strong></div>
+        <div>Outer zig-zag shell is formed separately; segmented foam/liner assembly nests behind it.</div>
+        <div>Best way to make the external structure expressive without forcing every layer to accordion together.</div>
+        <div><strong>Thermoformed EVA/TPU facets</strong></div>
+        <div>Thin molded panels or laminated panels are attached to flexible hinge zones.</div>
+        <div>Could feel more structural and premium, but tooling and crease durability need validation.</div>
+        <div><strong>Thin-insulation hinge upgrade</strong></div>
+        <div>Flexible aerogel blanket/fabric, felted insulation, or coconut fiber fills hinge zones where foam cannot fold.</div>
+        <div>Useful if thermal testing shows cold bridges at the valleys. Likely higher cost and sourcing complexity.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="risks">
+    <div class="section-inner">
+      <h2>Risks To Solve Early</h2>
+      <p class="lead">The design risk is not whether a collapsible cooler can be made. It is whether the folded exterior can stay clean, strong, insulated, leak-resistant, and easy to collapse after real use.</p>
+      <div class="grid">
+        <article class="card">
+          <span class="tag red">Thermal</span>
+          <h3>Cold bridges at hinge valleys</h3>
+          <p>Thin fold zones will underperform compared with foam faces. Prototype with and without thin flexible insulation in the valleys and test ice retention.</p>
+        </article>
+        <article class="card">
+          <span class="tag red">Water</span>
+          <h3>Valleys trap condensation and dirt</h3>
+          <p>External valleys need drain-friendly geometry and wipeable materials. Avoid deep seams that collect grime or stay wet after use.</p>
+        </article>
+        <article class="card">
+          <span class="tag amber">Durability</span>
+          <h3>Foam fatigue and crease memory</h3>
+          <p>Repeated sharp folding can crush foam and weaken laminations. Keep foam off the hinge line and cycle-test collapse/open motion.</p>
+        </article>
+        <article class="card">
+          <span class="tag amber">Usability</span>
+          <h3>Liner slack and zipper alignment</h3>
+          <p>The inner bucket needs controlled slack so it does not pinch, pull, or block closure in collapsed and expanded states.</p>
+        </article>
+        <article class="card">
+          <span class="tag">Structure</span>
+          <h3>Loaded sidewall distortion</h3>
+          <p>Ice and drinks can distort flexible folded walls. Handles should anchor into the base/rim/reinforced rails, not just the outer facets.</p>
+        </article>
+        <article class="card">
+          <span class="tag">Cost</span>
+          <h3>Premium material creep</h3>
+          <p>Aerogel and specialty laminates may solve thin-zone insulation, but they can quickly push the design away from a practical retail target.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="prototype">
+    <div class="section-inner">
+      <h2>Prototype Plan</h2>
+      <p class="lead">Start with a low-risk construction mockup that proves the product behavior before investing in molded panels or expensive insulation.</p>
+      <div class="split">
+        <div class="callout">
+          <h3>Build first</h3>
+          <ul>
+            <li>Make a 4-6 panel wall mockup with XPE/EPE foam on broad faces.</li>
+            <li>Use TPU-coated or tarpaulin outer fabric with fabric-only hinge valleys.</li>
+            <li>Add a removable or welded oversized liner bucket.</li>
+            <li>Add compression straps, snaps, or hooks to hold collapsed, mid, and full states.</li>
+            <li>Use a rigid/semi-rigid base and rim to control loaded shape.</li>
+          </ul>
+        </div>
+        <div class="callout">
+          <h3>Test immediately</h3>
+          <ul>
+            <li>Ice retention against a normal soft cooler of similar volume.</li>
+            <li>Leak and condensation behavior after meltwater exposure.</li>
+            <li>Open/collapse cycle durability for hinge valleys and foam panels.</li>
+            <li>Loaded carry test to confirm straps bypass the folding wall.</li>
+            <li>Cleaning test for the external valley geometry.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <span class="tag green">Verdict</span>
+          <h3>Best manufacturable concept</h3>
+          <p>A semi-rigid segmented soft cooler with an expressive faceted shell. Make it look like a concertina, but let panelized foam, a welded liner, and independent webbing do the real performance work.</p>
+        </article>
+        <article class="card">
+          <span class="tag amber">Premium exploration</span>
+          <h3>Where to experiment later</h3>
+          <p>Evaluate flexible aerogel fabric, coconut fiber insulation, or felted hinge insulation only after the basic panelized architecture proves out.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="sources">
+    <div class="section-inner">
+      <h2>Reference Links</h2>
+      <p class="lead">Sources used for manufacturing language, material stacks, welding approaches, and related foldable cooler construction.</p>
+      <ul class="source-list">
+        <li><a href="https://www.kelty.com/content/pdf/Kelty_Folding_Cooler_Instructions.pdf">Kelty Folding Cooler instructions</a>: folding foam panels, Velcro assembly, removable liner.</li>
+        <li><a href="https://www.softcoolers.com/">SoftCoolers.com</a>: fusion-welded liner and sweat-liner construction language.</li>
+        <li><a href="https://www.extremus.com/products/rendu-soft-cooler">Extremus Rendu Soft Cooler</a>: TPU/nylon/EPE foam construction and induction heat welding claims.</li>
+        <li><a href="https://lovrix.com/cooler-bag-manufacturer/">Lovrix OEM cooler bag manufacturing</a>: common fabric, foam, liner, webbing, welding, and leak-test options.</li>
+        <li><a href="https://alphatekmaterials.com/polarthin/">Polarthin flexible aerogel fabric</a>: thin flexible insulation option for advanced hinge-zone testing.</li>
+        <li><a href="https://nutshellcoolers.com/products/nutshell-cooler">Nutshell Cooler</a>: foldable cooler using coconut-husk insulation as an alternate material story.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    Prepared for Westfield Outdoors concept discussion. Draft manufacturing brief, June 2026.
+  </footer>
+</body>
+</html>
