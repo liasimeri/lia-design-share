@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Expandable Cooler Reference Deck</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #18212b;
+      --muted: #5a6673;
+      --line: #d9e0e6;
+      --paper: #f6f7f8;
+      --panel: #ffffff;
+      --blue: #1f6f8b;
+      --green: #557a46;
+      --gold: #a36d22;
+      --red: #a64d3f;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.45;
+    }
+    a { color: var(--blue); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    header {
+      min-height: 72vh;
+      display: grid;
+      align-items: end;
+      padding: 48px clamp(18px, 5vw, 72px);
+      background:
+        linear-gradient(120deg, rgba(24,33,43,.88), rgba(24,33,43,.55)),
+        radial-gradient(circle at 75% 25%, rgba(255,255,255,.18), transparent 28%),
+        linear-gradient(135deg, #244a58, #6f7f61 52%, #c49a54);
+      color: white;
+    }
+    .hero-inner { max-width: 1120px; }
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-size: 12px;
+      font-weight: 800;
+      opacity: .8;
+    }
+    h1 {
+      margin: 12px 0 18px;
+      max-width: 920px;
+      font-size: clamp(42px, 8vw, 86px);
+      line-height: .96;
+      letter-spacing: 0;
+    }
+    .hero-copy {
+      max-width: 760px;
+      font-size: clamp(17px, 2.2vw, 24px);
+      color: rgba(255,255,255,.88);
+    }
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 10px clamp(14px, 4vw, 56px);
+      border-bottom: 1px solid var(--line);
+      background: rgba(246,247,248,.92);
+      backdrop-filter: blur(12px);
+    }
+    nav a {
+      white-space: nowrap;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: white;
+      color: var(--ink);
+      font-size: 14px;
+      text-decoration: none;
+    }
+    section {
+      padding: 44px clamp(18px, 5vw, 72px);
+      border-bottom: 1px solid var(--line);
+    }
+    .section-inner { max-width: 1180px; margin: 0 auto; }
+    h2 { margin: 0 0 18px; font-size: clamp(28px, 4vw, 46px); line-height: 1.05; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 20px; letter-spacing: 0; }
+    p { margin: 0 0 12px; }
+    .lead { max-width: 820px; color: var(--muted); font-size: 18px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-top: 22px;
+    }
+    .card {
+      min-height: 230px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: 0 1px 0 rgba(24,33,43,.04);
+    }
+    .card strong { display: block; margin-bottom: 6px; }
+    .card.visual {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 0;
+      overflow: hidden;
+    }
+    .card.visual .tag,
+    .card.visual h3,
+    .card.visual p,
+    .card.visual ul {
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+    .card.visual ul { margin-bottom: 20px; }
+    .photo-frame {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      margin: 0;
+      background: #edf1f4;
+      border-bottom: 1px solid var(--line);
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      padding: 10px;
+      background: white;
+    }
+    .photo-note {
+      margin: -4px 20px 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .tag {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: #e9eef2;
+      color: #30404f;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+    .tag.green { background: #e9f1e4; color: var(--green); }
+    .tag.gold { background: #f4ecde; color: var(--gold); }
+    .tag.red { background: #f3e5e1; color: var(--red); }
+    ul {
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+    li { margin: 6px 0; }
+    .matrix {
+      display: grid;
+      grid-template-columns: minmax(160px, .8fr) minmax(220px, 1fr) minmax(220px, 1.1fr);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: white;
+      margin-top: 22px;
+    }
+    .matrix div { padding: 14px 16px; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+    .matrix div:nth-child(3n) { border-right: 0; }
+    .matrix div:nth-last-child(-n+3) { border-bottom: 0; }
+    .head { font-weight: 800; background: #edf1f4; color: #26323d; }
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 22px;
+    }
+    .callout {
+      padding: 22px;
+      border-left: 6px solid var(--blue);
+      background: white;
+      border-radius: 0 8px 8px 0;
+    }
+    .source-list {
+      columns: 2;
+      column-gap: 32px;
+      margin-top: 16px;
+    }
+    .source-list li { break-inside: avoid; margin: 0 0 12px; }
+    footer { padding: 28px clamp(18px, 5vw, 72px); color: var(--muted); font-size: 14px; }
+    @media (max-width: 760px) {
+      header { min-height: 64vh; }
+      .matrix { grid-template-columns: 1fr; }
+      .matrix div { border-right: 0; }
+      .matrix .head:nth-child(2), .matrix .head:nth-child(3) { display: none; }
+      .split { grid-template-columns: 1fr; }
+      .source-list { columns: 1; }
+    }
+    @media print {
+      @page { size: letter landscape; margin: .34in; }
+      html, body {
+        width: 11in;
+        background: white;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      body { font-size: 10.5px; line-height: 1.25; }
+      nav { display: none; }
+      header,
+      section,
+      footer {
+        break-after: page;
+        page-break-after: always;
+        border-bottom: 0;
+      }
+      header {
+        min-height: 7.7in;
+        padding: .56in;
+        align-items: end;
+      }
+      h1 { font-size: 56px; max-width: 8.4in; }
+      .hero-copy { font-size: 17px; max-width: 7.4in; }
+      section { padding: 0; }
+      .section-inner { max-width: none; width: 100%; }
+      h2 { font-size: 30px; margin-bottom: 8px; }
+      h3 { font-size: 13px; margin-bottom: 4px; }
+      p { margin-bottom: 6px; }
+      ul { margin-top: 5px; padding-left: 13px; }
+      li { margin: 2px 0; }
+      .lead { max-width: 8.8in; font-size: 12px; }
+      .grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+        margin-top: 10px;
+      }
+      .card {
+        min-height: 0;
+        padding: 10px;
+        box-shadow: none;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+      .card.visual { gap: 5px; }
+      .card.visual .tag,
+      .card.visual h3,
+      .card.visual p,
+      .card.visual ul {
+        margin-left: 9px;
+        margin-right: 9px;
+      }
+      .card.visual ul { margin-bottom: 8px; }
+      .photo-frame { aspect-ratio: 4 / 3; }
+      .photo-frame img { padding: 5px; }
+      .photo-note { margin: -2px 9px 0; font-size: 8.5px; }
+      .tag {
+        margin-bottom: 4px;
+        padding: 3px 5px;
+        font-size: 8px;
+      }
+      .split {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 10px;
+      }
+      .callout { padding: 12px; border-left-width: 4px; }
+      .matrix { margin-top: 10px; }
+      .matrix div { padding: 8px 10px; }
+      .source-list { columns: 2; column-gap: 24px; }
+      footer { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="hero-inner">
+      <div class="eyebrow">Westfield reference research · draft review</div>
+      <h1>Expandable Concertina Cooler</h1>
+      <p class="hero-copy">A compact reference deck for foldable, collapsible, and expandable cooler architectures. The goal is to identify practical mechanisms, manufacturable material systems, and risks before concept development.</p>
+    </div>
+  </header>
+
+  <nav aria-label="Deck sections">
+    <a href="#direction">Direction</a>
+    <a href="#references">References</a>
+    <a href="#matrix">Matrix</a>
+    <a href="#takeaways">Takeaways</a>
+    <a href="#risks">Risks</a>
+    <a href="#sources">Sources</a>
+  </nav>
+
+  <section id="direction">
+    <div class="section-inner">
+      <h2>Design Direction</h2>
+      <p class="lead">The working product idea is a cooler that can collapse for storage and expand when the user needs more volume, using a concertina or bellows-like structure. The strongest path appears to be a hybrid construction: controlled folding side structure, segmented insulation, leak-resistant liner strategy, and a carry load path that does not rely on the folding wall.</p>
+      <div class="split">
+        <div class="callout">
+          <h3>What the market already validates</h3>
+          <p>Consumers understand the value of compact storage, especially for cars, apartments, RVs, beach gear, grocery runs, sports sidelines, and tailgating. The key opportunity is making collapsibility feel more premium and controlled.</p>
+        </div>
+        <div class="callout">
+          <h3>What the concept must solve</h3>
+          <p>A true concertina cooler has to manage insulation gaps, water collection in fold valleys, liner slack, zipper alignment, and handle loads. These are manufacturing problems as much as styling problems.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="references">
+    <div class="section-inner">
+      <h2>Reference Set</h2>
+      <p class="lead">These examples are not all direct competitors. Some are mechanism references, some are manufacturing references, and some are useful because they show what commodity fold-flat coolers already do.</p>
+      <div class="grid">
+        <article class="card visual">
+          <figure class="photo-frame"><img src="assets/built-neoprene-tote.jpg" alt="BUILT neoprene tote reference"></figure>
+          <span class="tag gold">Origami soft form</span>
+          <h3>BUILT Origami Neoprene Tote</h3>
+          <p class="photo-note">Photo reference supplied for the BUILT Origami Neoprene Wine Bottle Tote.</p>
+          <p>Small neoprene bottle tote that folds from a flat soft form into volume through origami-like geometry.</p>
+          <ul>
+            <li>Good reference for fold language and compressibility.</li>
+            <li>Limited structural and payload relevance for a larger cooler.</li>
+            <li>Shows how soft material stretch can hide pattern complexity.</li>
+          </ul>
+        </article>
+        <article class="card visual">
+          <figure class="photo-frame"><img src="assets/kelty-folding-cooler.jpg" alt="Kelty Folding Cooler product photo"></figure>
+          <span class="tag green">Semi-rigid panels</span>
+          <h3>Kelty Folding Cooler</h3>
+          <p>Foldable cooler using fabric, molded PE foam panels, reinforced bottom details, and removable PEVA liner.</p>
+          <ul>
+            <li>Strong reference for cooler-like structure in a folding format.</li>
+            <li>Panel strategy is more manufacturable than continuous insulated bellows.</li>
+            <li>Removable liner simplifies cleaning and leak management.</li>
+          </ul>
+        </article>
+        <article class="card visual">
+          <figure class="photo-frame"><img src="assets/enrich-pop-up-cooler.jpg" alt="Enrich Bags pop-up cooler product photo"></figure>
+          <span class="tag red">Pop-up trolley</span>
+          <h3>Enrich Pop-Up Cooler</h3>
+          <p>Supplier example combining collapsible construction, welded leak-proof lining, telescopic handle, and wheels.</p>
+          <ul>
+            <li>Useful manufacturing reference for welded liner claims.</li>
+            <li>Shows how hardware can dominate collapsible cooler architecture.</li>
+            <li>Important load-path reminder for larger capacity designs.</li>
+          </ul>
+        </article>
+        <article class="card visual">
+          <figure class="photo-frame"><img src="assets/clevermade-tahoe.jpg" alt="CleverMade Tahoe collapsible cooler product photo"></figure>
+          <span class="tag green">Controlled collapse</span>
+          <h3>CleverMade Tahoe</h3>
+          <p>Collapsible soft cooler with SnapHinge-style side structure, metal rim, baseboard, and insulated liner.</p>
+          <ul>
+            <li>Clean benchmark for controlled folding and fast setup.</li>
+            <li>Collapsed height around 2.5 in is a strong storage story.</li>
+            <li>Rim and baseboard help the soft cooler feel intentional.</li>
+          </ul>
+        </article>
+        <article class="card visual">
+          <figure class="photo-frame"><img src="assets/coleman-snap-go.jpg" alt="Coleman Snap 'N Go collapsible hard cooler product photo"></figure>
+          <span class="tag green">Hard cooler proof</span>
+          <h3>Coleman Snap 'N Go</h3>
+          <p>New collapsible hard-sided cooler family announced for 35, 45, and 55 qt formats.</p>
+          <ul>
+            <li>Market proof that collapsible coolers are moving into mainstream hard-cooler territory.</li>
+            <li>Claims collapse to one-third size and quick open/collapse action.</li>
+            <li>Useful benchmark for consumer expectations around performance.</li>
+          </ul>
+        </article>
+        <article class="card visual">
+          <figure class="photo-frame"><img src="assets/coleman-54-can.jpg" alt="Coleman 54-can collapsible soft-sided cooler product photo"></figure>
+          <span class="tag">Mass-market soft cooler</span>
+          <h3>Coleman 54-Can Collapsible</h3>
+          <p>Large fold-flat soft cooler with leak-proof antimicrobial liner, shoulder strap, zipper, and pocketing.</p>
+          <ul>
+            <li>Useful commodity price and feature benchmark.</li>
+            <li>Simple fold-flat format, not much volume adjustability.</li>
+            <li>Good reminder that low-cost expectations are already established.</li>
+          </ul>
+        </article>
+        <article class="card visual">
+          <figure class="photo-frame"><img src="assets/ogio-alpha.jpg" alt="OGIO Alpha soft cooler product photo"></figure>
+          <span class="tag">Compression control</span>
+          <h3>OGIO Alpha Soft Cooler</h3>
+          <p>Fold-flat 24-can cooler with welded PEVA liner, tote handles, shoulder strap, and top compression strap.</p>
+          <ul>
+            <li>Compression strap is relevant for locking a smaller volume mode.</li>
+            <li>Welded liner language supports the premium soft-cooler direction.</li>
+            <li>Useful reference for a cleaner, less commodity visual style.</li>
+          </ul>
+        </article>
+        <article class="card visual">
+          <figure class="photo-frame"><img src="assets/icemule-classic.jpg" alt="IceMule roll-top soft cooler product photo"></figure>
+          <span class="tag gold">Roll-top soft body</span>
+          <h3>IceMule</h3>
+          <p>Waterproof roll-top soft cooler family that collapses or rolls down when empty.</p>
+          <ul>
+            <li>Strong reference for leak resistance and portability.</li>
+            <li>Roll-top architecture avoids zipper-lid alignment problems.</li>
+            <li>Less useful if the target product needs boxy access.</li>
+          </ul>
+        </article>
+        <article class="card visual">
+          <figure class="photo-frame"><img src="assets/nutshell-17l.jpg" alt="Nutshell 17L CocoFiber cooler product photo"></figure>
+          <span class="tag gold">Flexible insulation</span>
+          <h3>Nutshell 17L CocoFiber</h3>
+          <p>Foldable cooler using coconut husk fiber insulation and a sustainability story.</p>
+          <ul>
+            <li>Interesting alternative to foam for repeated fold zones.</li>
+            <li>Potentially relevant if rigid foam panels make concertina motion awkward.</li>
+            <li>Good sustainability cue if the concept needs a material story.</li>
+          </ul>
+        </article>
+        <article class="card visual">
+          <figure class="photo-frame"><img src="assets/flexifreeze-flat-cold.jpg" alt="FlexiFreeze flat cold cooler product photo"></figure>
+          <span class="tag gold">Cold panel idea</span>
+          <h3>FlexiFreeze Flat Cold Cooler</h3>
+          <p>Fold-flat cooler with freezable ice cells integrated into the side structure.</p>
+          <ul>
+            <li>Suggests turning fold panels into cold-assist panels.</li>
+            <li>Could reduce reliance on loose ice in some use cases.</li>
+            <li>More relevant as a feature concept than a structure reference.</li>
+          </ul>
+        </article>
+        <article class="card visual">
+          <figure class="photo-frame"><img src="assets/supplier-64-can.jpg" alt="64-can semi-rigid supplier cooler product photo"></figure>
+          <span class="tag">Supplier benchmark</span>
+          <h3>64-Can Semi-Rigid Supplier Example</h3>
+          <p>Factory-style semi-rigid folding cooler reference with 600D polyester, heat-welded liner, and stated load capacity.</p>
+          <ul>
+            <li>Useful for manufacturing language and common material stacks.</li>
+            <li>Shows typical supplier claims around leak-proof liners.</li>
+            <li>Good reminder to validate real weld quality and load testing.</li>
+          </ul>
+        </article>
+        <article class="card visual">
+          <figure class="photo-frame"><img src="assets/opux-cooler.jpg" alt="OPUX collapsible soft cooler product photo"></figure>
+          <span class="tag">Commodity market</span>
+          <h3>OPUX / Generic Collapsible Bags</h3>
+          <p>Large soft-sided collapsible cooler bags sold through mass and business retail channels.</p>
+          <ul>
+            <li>Useful for price, size, feature, and visual baseline.</li>
+            <li>Usually not strong mechanism references.</li>
+            <li>Important to avoid designing something that feels like a generic bag with folds.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="matrix">
+    <div class="section-inner">
+      <h2>Mechanism Matrix</h2>
+      <p class="lead">The references point to several viable families. Concertina should borrow from more than one rather than copying a single product.</p>
+      <div class="matrix">
+        <div class="head">Family</div><div class="head">Examples</div><div class="head">Usefulness for concept</div>
+        <div>Soft origami fold</div><div>BUILT Origami Tote</div><div>Useful visual and pattern language, but weak structural precedent.</div>
+        <div>Structured folding frame</div><div>CleverMade Tahoe</div><div>Strongest soft-cooler collapse mechanism reference.</div>
+        <div>Semi-rigid panel system</div><div>Kelty Folding Cooler, supplier examples</div><div>Most realistic route for insulation and shape control.</div>
+        <div>Collapsible hard cooler</div><div>Coleman Snap 'N Go</div><div>Market proof and performance benchmark, though likely different tooling.</div>
+        <div>Roll/pack soft body</div><div>IceMule</div><div>Good for waterproofness and portability; less box-like.</div>
+        <div>Flexible insulation or cold panels</div><div>Nutshell, FlexiFreeze</div><div>Potential solution for fold zones and cooling performance.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="takeaways">
+    <div class="section-inner">
+      <h2>Best Ideas To Borrow</h2>
+      <div class="grid">
+        <div class="card"><h3>Controlled fold structure</h3><p>Borrow the idea of snap hinges, rims, baseboards, and defined fold paths so collapse feels deliberate instead of floppy.</p></div>
+        <div class="card"><h3>Segmented insulation</h3><p>Use foam or flexible insulation in bays rather than expecting a thick continuous insulated wall to concertina cleanly.</p></div>
+        <div class="card"><h3>Independent load path</h3><p>Route handles, shoulder straps, and trolley loads through reinforced straps, rails, or side columns instead of through the bellows wall.</p></div>
+        <div class="card"><h3>Volume lock positions</h3><p>Use straps, clips, zippers, snaps, or toggles to hold low, medium, and full-volume states without the cooler ballooning.</p></div>
+        <div class="card"><h3>Liner strategy</h3><p>Consider a removable welded bucket liner or slack-managed inner liner to keep the leak zone simpler than the outer folding body.</p></div>
+        <div class="card"><h3>Base stays rigid</h3><p>Keep the bottom more rigid and durable than the walls so the cooler can be loaded, dragged, or set down without collapsing unpredictably.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="risks">
+    <div class="section-inner">
+      <h2>Manufacturing Risks</h2>
+      <div class="split">
+        <div class="card">
+          <h3>Concertina-specific issues</h3>
+          <ul>
+            <li>Fold valleys can collect water, dirt, and ice melt.</li>
+            <li>Repeated folding can crush foam and create thermal bridges.</li>
+            <li>Sharp pleats are bad for welded liners and coated materials.</li>
+            <li>Expanded height changes can disturb lid and zipper alignment.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Construction issues</h3>
+          <ul>
+            <li>Welded seam paths need access, pressure, generous radii, and compatible material stacks.</li>
+            <li>Too many layers at handle or zipper zones can cause cold welds, burn-through, or cosmetic defects.</li>
+            <li>External pockets and heavy hardware add leakage and stress complications.</li>
+            <li>Any waterproof claim needs zipper, liner, seam, and QA support.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout" style="margin-top:18px">
+        <h3>Recommended concept path</h3>
+        <p>Develop a hybrid concertina cooler: rigid or semi-rigid base, controlled sidewall fold structure, segmented insulation panels, welded removable or slack-managed liner, compression/locking straps for volume settings, and carry loads routed around the folding wall.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="sources">
+    <div class="section-inner">
+      <h2>Source Links</h2>
+      <ul class="source-list">
+        <li><a href="https://us.amazon.com/Built-OTW-BLK-Origami-Resistant-Neoprene/dp/B00E1GE8J8" target="_blank" rel="noreferrer">BUILT Origami Neoprene Bottle Tote</a></li>
+        <li><a href="https://www.campingworld.com/kelty-folding-cooler-206275.html" target="_blank" rel="noreferrer">Kelty Folding Cooler</a></li>
+        <li><a href="https://enrichbags.en.made-in-china.com/product/SCwJNXsreVhd/China-24-Can-Pop-up-Cooler-Bag-Lightweight-Insulated-Waterproof-Portable-and-Collapsible-for-Travel-Picnics-Hiking-Camping-and-BBQ.html" target="_blank" rel="noreferrer">Enrich Bags Pop-Up Cooler</a></li>
+        <li><a href="https://www.clevermade.com/products/eco-tahoe-collapsible-cooler" target="_blank" rel="noreferrer">CleverMade Tahoe Collapsible Cooler</a></li>
+        <li><a href="https://ir.newellbrands.com/node/30211/pdf" target="_blank" rel="noreferrer">Coleman Snap 'N Go Collapsible Hard Cooler</a></li>
+        <li><a href="https://www.campingworld.com/coleman-54-can-collapsible-soft-sided-cooler-742496.html" target="_blank" rel="noreferrer">Coleman 54-Can Collapsible Soft-Sided Cooler</a></li>
+        <li><a href="https://www.golfdiscount.com/products/ogio-2025-soft-cooler" target="_blank" rel="noreferrer">OGIO Alpha Soft Cooler</a></li>
+        <li><a href="https://icemule.com/" target="_blank" rel="noreferrer">IceMule Soft Coolers</a></li>
+        <li><a href="https://www.rei.com/product/249129/nutshell-coolers-17-l-cocofiber-foldable-cooler" target="_blank" rel="noreferrer">Nutshell 17 L CocoFiber Foldable Cooler</a></li>
+        <li><a href="https://flexifreeze.com/products/refreezable-soft-sided-cooler" target="_blank" rel="noreferrer">FlexiFreeze Refreezable Soft Sided Flat Cold Cooler</a></li>
+        <li><a href="https://www.cooler-bag.com/Mobile-Cooler/64-can-large-semi-rigid-soft-folding-collapsible-cooler_product4080.html" target="_blank" rel="noreferrer">64-Can Semi-Rigid Folding Cooler Supplier Example</a></li>
+        <li><a href="https://business.walmart.com/ip/OPUX-Cooler-Bag-60-Cans-Insulated-Soft-Collapsible-Portable-Cooler-Soft-Sided-Leakproof-Cooler-Beach-Camping-Shoulder-Strap-Ice-Chest-Travel-Road-Tri/16573770132" target="_blank" rel="noreferrer">OPUX / Generic Collapsible Soft Cooler Example</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    Temporary review deck generated June 3, 2026. Content is a draft synthesis from the current research conversation and should be source-checked before customer-facing use.
+  </footer>
+</body>
+</html>
