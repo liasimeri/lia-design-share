@@ -136,6 +136,34 @@
       padding: 10px;
       background: white;
     }
+    .state-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      border-bottom: 1px solid var(--line);
+      background: var(--line);
+    }
+    .state-frame {
+      min-width: 0;
+      margin: 0;
+      background: white;
+    }
+    .state-frame img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: contain;
+      display: block;
+      padding: 10px;
+      background: white;
+    }
+    .state-frame figcaption {
+      padding: 0 10px 8px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
     .photo-note {
       margin: -4px 20px 0;
       color: var(--muted);
@@ -239,6 +267,10 @@
         gap: 8px;
         margin-top: 10px;
       }
+      #references .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
       .card {
         min-height: 0;
         padding: 10px;
@@ -257,6 +289,14 @@
       .card.visual ul { margin-bottom: 8px; }
       .photo-frame { aspect-ratio: 4 / 3; }
       .photo-frame img { padding: 5px; }
+      .state-frame img {
+        aspect-ratio: 4 / 3;
+        padding: 5px;
+      }
+      .state-frame figcaption {
+        padding: 0 5px 4px;
+        font-size: 7.5px;
+      }
       .photo-note { margin: -2px 9px 0; font-size: 8.5px; }
       .tag {
         margin-bottom: 4px;
@@ -317,7 +357,10 @@
       <p class="lead">These examples are not all direct competitors. Some are mechanism references, some are manufacturing references, and some are useful because they show what commodity fold-flat coolers already do.</p>
       <div class="grid">
         <article class="card visual">
-          <figure class="photo-frame"><img src="assets/built-neoprene-tote.jpg" alt="BUILT neoprene tote reference"></figure>
+          <div class="state-pair" aria-label="BUILT Origami Tote open and collapsed states">
+            <figure class="state-frame"><img src="assets/states/built-open.jpg" alt="BUILT Origami Tote open bottle-carry state"><figcaption>Open</figcaption></figure>
+            <figure class="state-frame"><img src="assets/states/built-collapsed.jpg" alt="BUILT Origami Tote compressed folded state"><figcaption>Collapsed</figcaption></figure>
+          </div>
           <span class="tag gold">Origami soft form</span>
           <h3>BUILT Origami Neoprene Tote</h3>
           <p class="photo-note">Photo reference supplied for the BUILT Origami Neoprene Wine Bottle Tote.</p>
@@ -329,7 +372,10 @@
           </ul>
         </article>
         <article class="card visual">
-          <figure class="photo-frame"><img src="assets/kelty-folding-cooler.jpg" alt="Kelty Folding Cooler product photo"></figure>
+          <div class="state-pair" aria-label="Kelty Folding Cooler open and collapsed states">
+            <figure class="state-frame"><img src="assets/states/kelty-open.jpg" alt="Kelty Folding Cooler open state"><figcaption>Open</figcaption></figure>
+            <figure class="state-frame"><img src="assets/states/kelty-collapsed.jpg" alt="Kelty Folding Cooler collapsed low storage state"><figcaption>Collapsed</figcaption></figure>
+          </div>
           <span class="tag green">Semi-rigid panels</span>
           <h3>Kelty Folding Cooler</h3>
           <p>Foldable cooler using fabric, molded PE foam panels, reinforced bottom details, and removable PEVA liner.</p>
@@ -340,7 +386,10 @@
           </ul>
         </article>
         <article class="card visual">
-          <figure class="photo-frame"><img src="assets/enrich-pop-up-cooler.jpg" alt="Enrich Bags pop-up cooler product photo"></figure>
+          <div class="state-pair" aria-label="Enrich Pop-Up Cooler open and collapsed states">
+            <figure class="state-frame"><img src="assets/states/enrich-open.webp" alt="Enrich Pop-Up Cooler open state"><figcaption>Open</figcaption></figure>
+            <figure class="state-frame"><img src="assets/states/enrich-collapsed.webp" alt="Enrich Pop-Up Cooler collapsed and detail state composite"><figcaption>Collapsed</figcaption></figure>
+          </div>
           <span class="tag red">Pop-up trolley</span>
           <h3>Enrich Pop-Up Cooler</h3>
           <p>Supplier example combining collapsible construction, welded leak-proof lining, telescopic handle, and wheels.</p>
@@ -351,7 +400,10 @@
           </ul>
         </article>
         <article class="card visual">
-          <figure class="photo-frame"><img src="assets/clevermade-tahoe.jpg" alt="CleverMade Tahoe collapsible cooler product photo"></figure>
+          <div class="state-pair" aria-label="CleverMade Tahoe open and collapsed states">
+            <figure class="state-frame"><img src="assets/states/clevermade-open.jpg" alt="CleverMade Tahoe open loaded state"><figcaption>Open</figcaption></figure>
+            <figure class="state-frame"><img src="assets/states/clevermade-collapsed.jpg" alt="CleverMade Tahoe collapsed storage state"><figcaption>Collapsed</figcaption></figure>
+          </div>
           <span class="tag green">Controlled collapse</span>
           <h3>CleverMade Tahoe</h3>
           <p>Collapsible soft cooler with SnapHinge-style side structure, metal rim, baseboard, and insulated liner.</p>
@@ -362,7 +414,10 @@
           </ul>
         </article>
         <article class="card visual">
-          <figure class="photo-frame"><img src="assets/coleman-snap-go.jpg" alt="Coleman Snap 'N Go collapsible hard cooler product photo"></figure>
+          <div class="state-pair" aria-label="Coleman Snap N Go open and collapsed states">
+            <figure class="state-frame"><img src="assets/states/coleman-snap-open.jpg" alt="Coleman Snap N Go open hard cooler state"><figcaption>Open</figcaption></figure>
+            <figure class="state-frame"><img src="assets/states/coleman-snap-collapsed.jpg" alt="Coleman Snap N Go collapsed hard cooler state"><figcaption>Collapsed</figcaption></figure>
+          </div>
           <span class="tag green">Hard cooler proof</span>
           <h3>Coleman Snap 'N Go</h3>
           <p>New collapsible hard-sided cooler family announced for 35, 45, and 55 qt formats.</p>
@@ -373,7 +428,10 @@
           </ul>
         </article>
         <article class="card visual">
-          <figure class="photo-frame"><img src="assets/coleman-54-can.jpg" alt="Coleman 54-can collapsible soft-sided cooler product photo"></figure>
+          <div class="state-pair" aria-label="Coleman 54-Can open and collapsed states">
+            <figure class="state-frame"><img src="assets/states/coleman54-open.jpg" alt="Coleman 54-can cooler open state"><figcaption>Open</figcaption></figure>
+            <figure class="state-frame"><img src="assets/states/coleman54-collapsed.jpg" alt="Coleman 54-can cooler folded flat state"><figcaption>Collapsed</figcaption></figure>
+          </div>
           <span class="tag">Mass-market soft cooler</span>
           <h3>Coleman 54-Can Collapsible</h3>
           <p>Large fold-flat soft cooler with leak-proof antimicrobial liner, shoulder strap, zipper, and pocketing.</p>
@@ -384,7 +442,10 @@
           </ul>
         </article>
         <article class="card visual">
-          <figure class="photo-frame"><img src="assets/ogio-alpha.jpg" alt="OGIO Alpha soft cooler product photo"></figure>
+          <div class="state-pair" aria-label="OGIO Alpha open and compressed states">
+            <figure class="state-frame"><img src="assets/states/ogio-open.jpg" alt="OGIO Alpha soft cooler front state"><figcaption>Open</figcaption></figure>
+            <figure class="state-frame"><img src="assets/states/ogio-collapsed.jpg" alt="OGIO Alpha soft cooler compression strap state"><figcaption>Compressed</figcaption></figure>
+          </div>
           <span class="tag">Compression control</span>
           <h3>OGIO Alpha Soft Cooler</h3>
           <p>Fold-flat 24-can cooler with welded PEVA liner, tote handles, shoulder strap, and top compression strap.</p>
@@ -395,7 +456,10 @@
           </ul>
         </article>
         <article class="card visual">
-          <figure class="photo-frame"><img src="assets/icemule-classic.jpg" alt="IceMule roll-top soft cooler product photo"></figure>
+          <div class="state-pair" aria-label="IceMule open and rolled states">
+            <figure class="state-frame"><img src="assets/states/icemule-open.jpg" alt="IceMule Classic filled roll-top state"><figcaption>Open</figcaption></figure>
+            <figure class="state-frame"><img src="assets/states/icemule-collapsed.jpg" alt="IceMule Classic rolled soft-body state"><figcaption>Rolled</figcaption></figure>
+          </div>
           <span class="tag gold">Roll-top soft body</span>
           <h3>IceMule</h3>
           <p>Waterproof roll-top soft cooler family that collapses or rolls down when empty.</p>
@@ -406,7 +470,10 @@
           </ul>
         </article>
         <article class="card visual">
-          <figure class="photo-frame"><img src="assets/nutshell-17l.jpg" alt="Nutshell 17L CocoFiber cooler product photo"></figure>
+          <div class="state-pair" aria-label="Nutshell cooler open and flat storage reference">
+            <figure class="state-frame"><img src="assets/states/nutshell-open.jpg" alt="Nutshell 17L cooler open product state"><figcaption>Open</figcaption></figure>
+            <figure class="state-frame"><img src="assets/states/nutshell-collapsed.jpg" alt="Nutshell 17L cooler flat-storage reference image"><figcaption>Flat Storage</figcaption></figure>
+          </div>
           <span class="tag gold">Flexible insulation</span>
           <h3>Nutshell 17L CocoFiber</h3>
           <p>Foldable cooler using coconut husk fiber insulation and a sustainability story.</p>
@@ -417,7 +484,10 @@
           </ul>
         </article>
         <article class="card visual">
-          <figure class="photo-frame"><img src="assets/flexifreeze-flat-cold.jpg" alt="FlexiFreeze flat cold cooler product photo"></figure>
+          <div class="state-pair" aria-label="FlexiFreeze open and packed states">
+            <figure class="state-frame"><img src="assets/states/flexifreeze-open.jpg" alt="FlexiFreeze cooler open state"><figcaption>Open</figcaption></figure>
+            <figure class="state-frame"><img src="assets/states/flexifreeze-collapsed.jpg" alt="FlexiFreeze cooler packed closed state"><figcaption>Closed</figcaption></figure>
+          </div>
           <span class="tag gold">Cold panel idea</span>
           <h3>FlexiFreeze Flat Cold Cooler</h3>
           <p>Fold-flat cooler with freezable ice cells integrated into the side structure.</p>
@@ -428,7 +498,10 @@
           </ul>
         </article>
         <article class="card visual">
-          <figure class="photo-frame"><img src="assets/supplier-64-can.jpg" alt="64-can semi-rigid supplier cooler product photo"></figure>
+          <div class="state-pair" aria-label="64-can supplier cooler open and folded reference">
+            <figure class="state-frame"><img src="assets/states/supplier-open.jpg" alt="64-can semi-rigid supplier cooler product state"><figcaption>Open</figcaption></figure>
+            <figure class="state-frame"><img src="assets/states/supplier-collapsed.jpg" alt="64-can semi-rigid supplier cooler folded-reference image"><figcaption>Folded Ref.</figcaption></figure>
+          </div>
           <span class="tag">Supplier benchmark</span>
           <h3>64-Can Semi-Rigid Supplier Example</h3>
           <p>Factory-style semi-rigid folding cooler reference with 600D polyester, heat-welded liner, and stated load capacity.</p>
@@ -439,7 +512,10 @@
           </ul>
         </article>
         <article class="card visual">
-          <figure class="photo-frame"><img src="assets/opux-cooler.jpg" alt="OPUX collapsible soft cooler product photo"></figure>
+          <div class="state-pair" aria-label="OPUX cooler open and closed states">
+            <figure class="state-frame"><img src="assets/states/opux-open.jpg" alt="OPUX cooler open access state"><figcaption>Open</figcaption></figure>
+            <figure class="state-frame"><img src="assets/states/opux-collapsed.jpg" alt="OPUX cooler closed carry state"><figcaption>Closed</figcaption></figure>
+          </div>
           <span class="tag">Commodity market</span>
           <h3>OPUX / Generic Collapsible Bags</h3>
           <p>Large soft-sided collapsible cooler bags sold through mass and business retail channels.</p>
